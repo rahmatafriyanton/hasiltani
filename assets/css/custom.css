@@ -1,0 +1,40 @@
+/* ----------------------------------------------------------------
+	Custom CSS
+
+	Add all your Custom Styled CSS here for New Styles or
+	Overwriting Default Theme Styles for Better Handling Updates
+-----------------------------------------------------------------*/
+
+
+.produk-img {
+	max-height:  100% !important;
+}
+
+.car-list .car-image [type=checkbox] { margin-right: 4px; }
+
+.car-list .car-image div {
+	background-color: #F5F5F5;
+	padding: 12px;
+	margin-left: 8px;
+}
+
+.car-list .car-image img {
+	display: block;
+	margin-top: 10px;
+	width: 100% !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+	background-color: #333 !important;
+}
+
+.list-group-item.active {
+    background-color: #47c9af !important;
+    border-color: #47c9af !important;
+}
+
+.btn-tambah {
+	background-color: #47c9af;
+	border-color: #47c9af;
+	color: #fff;
+}
