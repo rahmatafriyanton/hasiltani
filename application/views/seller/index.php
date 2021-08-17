@@ -140,7 +140,7 @@ $(document).ready(function() {
           id: $(this).data('id')
         },
         success: function(response) {
-          alert(response.message);
+          alert('Produk Berhasil Dihapus');
           if (response.status == '200') {
             location.reload();
           } else {

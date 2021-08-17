@@ -14,14 +14,13 @@
 
 </section><!-- #page-title end -->
 
-<!-- Content
-============================================= -->
+<!-- Content -->
 <section id="content">
   <div class="content-wrap">
     <div class="container clearfix">
 
       <div class="row gutter-40 col-mb-80">
-        <div class="postcontent col-lg-9 order-lg-last">
+        <div class="postcontent col-lg-12">
 
           <div class="single-product">
             <div class="product">
@@ -29,14 +28,13 @@
 
                 <div class="col-md-6">
 
-                  <!-- Product Single - Gallery
-                                    ============================================= -->
+                  <!-- Product Single - Gallery -->
                   <div class="product-image">
                     <div class="fslider" data-pagi="false" data-arrows="false" data-thumbs="true">
                       <div class="flexslider">
                         <div class="slider-wrap" data-lightbox="gallery">
                           <?php foreach ($produk['produk']['foto_produk'] as $row): ?>
-                            <div class="slide" data-thumb="<?= base_url('assets/img/produk/brokoli/brokoli-1.jpg') ?>">
+                            <div class="slide" data-thumb="<?= base_url('assets/img/produk/').$row['foto_produk'] ?>">
                               <a href="<?= base_url('assets/img/produk/').$row['foto_produk'] ?>" title="<?= $row['foto_produk'] ?>" data-lightbox="gallery-item">
                                 <img src="<?= base_url('assets/img/produk/').$row['foto_produk'] ?>" alt="<?= $row['foto_produk'] ?>">
                               </a>
@@ -94,8 +92,7 @@
                     </div>
                   </div><!-- Product Single - Meta End -->
 
-                  <!-- Product Single - Share
-                                    ============================================= -->
+                  <!-- Product Single - Share -->
                   <div class="si-share border-0 d-flex justify-content-between align-items-center mt-4">
                     <span>Bagikan:</span>
                     <div>
@@ -466,7 +463,7 @@
 
         </div>
 
-        <div class="sidebar col-lg-3">
+        <!-- <div class="sidebar col-lg-3">
           <div class="sidebar-widgets-wrap">
 
             <div class="widget clearfix">
@@ -518,7 +515,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
     </div>

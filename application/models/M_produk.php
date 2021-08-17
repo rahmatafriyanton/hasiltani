@@ -54,6 +54,11 @@ class M_produk extends CI_Model {
 		return $this->db->delete('foto_produk');
 	}
 
+	public function hapus_produk($params) {
+		$this->db->where($params);
+		return $this->db->delete($this->table);
+	}
+
 	public function get_foto_produk($produk_id) {
 		return $this->db->get_where('foto_produk', ['produk_id' => $produk_id])->result_array();
 	}

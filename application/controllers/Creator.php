@@ -138,8 +138,8 @@ class Creator extends CI_Controller {
 								 <a href="'.base_url('Creator/edit/').$v['artikel_id'].'" class="btn btn-sm btn-info text-white"><i class="icon-edit"></i></a>
 								 <button class="btn btn-sm btn-danger delete " data-id="' . $v['artikel_id'] . '"><i class="icon-trash-alt"></i></button>';
 			$row[] = $i;
-			$row[] = "<img src='". base_url('assets/img/blog/').$v['thumbnail_artikel']."'>";
-			$row[] = $v['judul'];
+			$row[] = "<a href='".base_url('Artikel/read/').$v['artikel_id']."'><img src='". base_url('assets/img/blog/').$v['thumbnail_artikel']."'></a>";
+			$row[] = "<a href='".base_url('Artikel/read/').$v['artikel_id']."'>".$v['judul']."</a>";
 			$row[] = $v['nama_kategori'];
 			$row[] = $v['tags'];
 			$row[] = $v['created_at'];

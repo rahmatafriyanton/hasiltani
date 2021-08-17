@@ -112,7 +112,18 @@ class Seller extends CI_Controller {
 	}
 
 	public function delete() {
-		$hapus = $this->produk->delete_produk();
+		$params['produk_id'] = $this->input->post('id');
+		$foto_produk = $this->produk->get_detail($params)['produk']['foto_produk'];
+		$hapus_foto_produk = [];
+		foreach ($foto_produk as $key => $value) {
+			$hapus_foto_produk[$key] = $value['foto_produk'];
+		}
+		$this->hapus_foto_produk($hapus_foto_produk);
+		$hapus = $this->produk->hapus_produk($params);
+		if ($hapus) {
+			return ['status' =>200];
+		}
+		
 	}
 
 	private function upload_files($files) {
@@ -176,8 +187,8 @@ class Seller extends CI_Controller {
 								 <a href="'.base_url('seller/edit_produk/').$v['produk_id'].'" class="btn btn-sm btn-info text-white"><i class="icon-edit"></i></a>
 								 <button class="btn btn-sm btn-danger delete " data-id="' . $v['produk_id'] . '"><i class="icon-trash-alt"></i></button>';
 			$row[] = $i;
-			$row[] = "<img src='". base_url('assets/img/produk/').$foto_produk[0]['foto_produk']."'>";
-			$row[] = $v['nama_produk'];
+			$row[] = "<a href='".base_url('Produk/detail/').$v['produk_id']."'><img src='". base_url('assets/img/produk/').$foto_produk[0]['foto_produk']."'></a>";
+			$row[] = "<a href='".base_url('Produk/detail/').$v['produk_id']."'>".$v['nama_produk']."</a>";
 			$row[] = $v['nama_kategori'];
 			$row[] = $v['harga'];
 			$row[] = $v['jumlah_terjual'];

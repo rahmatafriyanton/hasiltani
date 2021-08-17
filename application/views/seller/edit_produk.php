@@ -37,7 +37,7 @@
                     <option value="">Pilih Kategori</option>
                     <?php 
                     foreach ($kategori as $row) {
-                      echo "<option value='{$row->nama_kategori}'>{$row->nama_kategori}</option>";
+                      echo "<option value='{$row['nama_kategori']}'>{$row['nama_kategori']}</option>";
                     }
                     ?>
                   </select>
