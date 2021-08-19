@@ -11,6 +11,8 @@ class M_produk extends CI_Model {
 	public function add_process($params) {
 		// var_dump($params['foto_produk']); die();
 		$this->db->trans_begin();
+		$params['produk']['user_id'] = $this->session->userdata('user_id');
+		$params['produk']['nama_lengkap'] = $this->session->userdata('nama_lengkap');
 		$this->db->insert('produk', $params['produk']);
 
 		if ($this->db->trans_status() === true) {
@@ -71,6 +73,7 @@ class M_produk extends CI_Model {
 		$this->db->select('*');
 		$this->db->from($this->table);
 		$this->db->where('is_active', 1);
+		$this->db->where('user_id', $this->session->userdata('user_id'));
 
 		if (isset($params['produk_id'])) {
 			$this->db->where('produk_id', $params['produk_id']);
@@ -154,6 +157,7 @@ class M_produk extends CI_Model {
 		$this->db->select('produk_id');
 		$this->db->from($this->table);
 		$this->db->where('is_active', 1);
+		$this->db->where('user_id', $this->session->userdata('user_id'));
 
 		if (!isset($params['offset'])) {
 			$params['offset'] = '0';
@@ -169,6 +173,7 @@ class M_produk extends CI_Model {
 		$this->db->select('produk_id');
 		$this->db->from($this->table);
 		$this->db->where('is_active', 1);
+		$this->db->where('user_id', $this->session->userdata('user_id'));
 
 		if (isset($params['produk_id'])) {
 			$this->db->where('produk_id', $params['produk_id']);
@@ -185,7 +190,7 @@ class M_produk extends CI_Model {
 
 	// Produk Belanja
 	public function list() {
-		$produk = $this->db->get($this->table)->result_array();
+		$produk = $this->db->get_where($this->table, ['user_id !=' => $this->session->userdata('user_id')])->result_array();
 		$data['produk'] = $produk;
 		foreach ($produk as $key => $value) {
 			$foto_produk = $this->db->get_where('foto_produk', ['produk_id' => $value['produk_id']])->result_array();

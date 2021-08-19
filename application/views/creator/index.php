@@ -13,18 +13,15 @@
 
 </section>
 
-<section id="content">
-  <div class="content-wrap">
+<section id="content" class="">
+  <div class="content-wrap pt-5">
     <div class="container clearfix">
 
 
       <div class="row ">
 
         <div class="col-md-12">
-         <div class="d-flex justify-content-between mb-3">
-          <div>
-            <h3>Artikel Saya</h3>
-          </div>
+         <div class="d-flex justify-content-end mb-3">
           <div>
             <a href="<?= base_url('Creator/add') ?>" style="margin:2px" class="btn btn-sm btn-tambah">Tambah</a>
           </div>

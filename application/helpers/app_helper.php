@@ -18,6 +18,18 @@ if (! function_exists('cek_login'))
 	}
 }
 
+if (!function_exists('idr_format')) {
+  function idr_format($num)
+  {
+    $num_arr = explode('.', $num);
+
+    $str_dec = !empty($num_arr[1]) ? ',' . $num_arr[1] : '';
+
+    $hasil_rupiah = number_format(floatval($num_arr[0]), 0, ',', '.');
+    return 'Rp. ' . $hasil_rupiah . $str_dec;
+  }
+}
+
 if (! function_exists('daftarkan_session'))
 {
 	function daftarkan_session($username) {
@@ -98,6 +110,19 @@ if (!function_exists('bulan')) {
       break;
     }
     return $bulan;
+  }
+}
+
+
+// Isi Chart
+if (! function_exists('isi_chart'))
+{
+  function isi_chart($limit = null) {
+    // Daftarkan Session
+    $CI = get_instance();
+    $CI->load->model('M_chart', 'chart');
+    $data = $CI->chart->get_chart($limit);
+    return $data;
   }
 }
 

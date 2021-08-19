@@ -3,8 +3,7 @@
 <section id="page-title" class="page-title-pattern">
 
   <div class="container clearfix">
-    <h1>Artikel Saya</h1>
-    <span>Kamu bisa membagikan apapun di sini.</span>
+    <h1>Edit Artikel</h1>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Artikel</a></li>
       <li class="breadcrumb-item active" aria-current="page">Artikel Saya</li>
@@ -14,14 +13,10 @@
 </section>
 
 <section id="content">
-  <div class="content-wrap" style="padding-top: 50px !important;">
+  <div class="content-wrap pt-4">
     <div class="container clearfix">
-
-
       <div class="row ">
-
         <div class="col-md-12">
-          <h4 class="pb-4 font-weight-bolder">Buat Artikel Terbaikmu Sekarang</h4>
           <form id="form-edit">
             <input type="hidden" value="<?= $detail['artikel_id'] ?>" name="artikel_id">
             <div class="row">

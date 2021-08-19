@@ -62,8 +62,13 @@ class Seller extends CI_Controller {
 		$detail = $this->produk->get_serverside(['id' => $id_produk])['data']['result'];
 		$detail = $detail ? $detail[0] : [];
 		$data['produk'] = $detail;
-		$data['foto_produk'] = $this->produk->get_foto_produk($id_produk);
-		$this->load->view('seller/edit_produk', $data);
+		if (!empty($data['produk'])) {
+			$data['foto_produk'] = $this->produk->get_foto_produk($id_produk);
+			$this->load->view('seller/edit_produk', $data);
+		} else {
+			$this->load->view('errors/404', ['title' => 'Halaman Tidak Ditemukan']);
+		}
+			
 	}
 
 	public function edit_process() {
@@ -121,7 +126,7 @@ class Seller extends CI_Controller {
 		$this->hapus_foto_produk($hapus_foto_produk);
 		$hapus = $this->produk->hapus_produk($params);
 		if ($hapus) {
-			return ['status' =>200];
+			echo json_encode(['status' =>200]);
 		}
 		
 	}
@@ -190,9 +195,9 @@ class Seller extends CI_Controller {
 			$row[] = "<a href='".base_url('Produk/detail/').$v['produk_id']."'><img src='". base_url('assets/img/produk/').$foto_produk[0]['foto_produk']."'></a>";
 			$row[] = "<a href='".base_url('Produk/detail/').$v['produk_id']."'>".$v['nama_produk']."</a>";
 			$row[] = $v['nama_kategori'];
-			$row[] = $v['harga'];
+			$row[] = idr_format($v['harga']);
 			$row[] = $v['jumlah_terjual'];
-			$row[] = $v['stok'];
+			$row[] = $v['stok'].$v['satuan'];
 			$row[] = $button;
 			$data[] = $row;
 		}

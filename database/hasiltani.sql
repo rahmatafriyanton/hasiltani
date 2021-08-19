@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 17, 2021 at 03:17 PM
+-- Generation Time: Aug 19, 2021 at 07:43 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -52,6 +52,50 @@ INSERT INTO `artikel` (`artikel_id`, `nama_kategori`, `user_id`, `judul`, `deskr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chart`
+--
+
+CREATE TABLE `chart` (
+  `chart_id` int(11) NOT NULL,
+  `user_id` varchar(30) NOT NULL,
+  `toko_id` varchar(30) NOT NULL,
+  `nama_toko` varchar(100) NOT NULL,
+  `produk_id` varchar(100) NOT NULL,
+  `nama_produk` varchar(100) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_transaksi`
+--
+
+CREATE TABLE `detail_transaksi` (
+  `detail_transaksi_id` int(11) NOT NULL,
+  `transaksi_id` varchar(30) NOT NULL,
+  `produk_id` varchar(30) NOT NULL,
+  `nama_produk` varchar(100) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `total` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`detail_transaksi_id`, `transaksi_id`, `produk_id`, `nama_produk`, `jumlah`, `total`) VALUES
+(3, '20210819070653', '20210818015816', 'Jeruk Manis', 3, 30000),
+(4, '20210819070653', '20210818040605', 'Mangga Muda', 2, 20000),
+(5, '20210819071506', '20210818015816', 'Jeruk Manis', 2, 20000),
+(6, '20210819071506', '20210818040605', 'Mangga Muda', 1, 10000),
+(7, '20210819071600', '20210818015816', 'Jeruk Manis', 4, 40000),
+(8, '20210819071600', '20210818040605', 'Mangga Muda', 2, 20000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `foto_produk`
 --
 
@@ -68,9 +112,12 @@ CREATE TABLE `foto_produk` (
 INSERT INTO `foto_produk` (`foto_produk_id`, `produk_id`, `foto_produk`) VALUES
 (27, '20210813105720', '20210813105720_1.jpg'),
 (28, '20210813105756', '20210813105756_1.jpg'),
-(30, '20210817044318', '20210817044318_1.jpg'),
-(31, '20210817044318', '20210817044318_2.jpg'),
-(32, '20210817044318', '20210817044318_3.jpg');
+(36, '20210818015816', '20210818015816_1.jpg'),
+(37, '20210818015816', '20210818015816_2.jpg'),
+(38, '20210818015816', '20210818015816_3.jpg'),
+(39, '20210818040605', '20210818040605_1.jpg'),
+(40, '20210818040605', '20210818040605_2.jpg'),
+(41, '20210818040605', '20210818040605_3.jpg');
 
 -- --------------------------------------------------------
 
@@ -125,6 +172,8 @@ INSERT INTO `otp_email` (`email_otp_id`, `otp_email`, `otp_kode`, `otp_exp`) VAL
 
 CREATE TABLE `produk` (
   `produk_id` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `nama_lengkap` varchar(100) NOT NULL,
   `nama_kategori` varchar(100) NOT NULL,
   `nama_produk` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL,
@@ -141,8 +190,39 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`produk_id`, `nama_kategori`, `nama_produk`, `deskripsi`, `harga`, `diskon`, `stok`, `satuan`, `jumlah_terjual`, `tags`, `is_active`) VALUES
-('20210817044318', 'Buah-Buahan', 'Jeruk Manis edit', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero non possimus, nemo modi molestiae dolor incidunt molestias distinctio qui enim doloribus ex laboriosam hic porro expedita, assumenda esse amet numquam nesciunt explicabo perferendis soluta, eius. Architecto autem totam quos, numquam nostrum accusantium dicta ut quam aliquam, necessitatibus esse. Est eius dolor, distinctio, soluta, perspiciatis molestiae nostrum perferendis deserunt deleniti sunt magnam, numquam quam ad velit. Temporibus dolores illum quae placeat reiciendis. Laboriosam, maxime nobis excepturi perferendis earum. Accusamus officiis quam, fuga. Fugit eum voluptate, nam sed, esse quod modi accusamus quibusdam quisquam in voluptatem, adipisci voluptates repellendus saepe. Nulla, totam?\r\nMaxime nisi dolorum eum facere modi aliquid ducimus enim magnam accusantium nam non tempora error exercitationem debitis quae, facilis? Explicabo hic exercitationem nesciunt assumenda, ut expedita reprehenderit quidem vero omnis ea aliquam, eum error illum sunt accusantium earum a, cumque aspernatur nam vitae. Nulla id animi ratione sequi adipisci eligendi pariatur eius eveniet, sint doloribus, quidem corporis voluptates recusandae laudantium praesentium nobis consequatur ad corrupti consectetur, nemo vero est, beatae. Voluptas minima reiciendis eos quam at quod vel architecto alias quisquam perspiciatis quia sint nisi inventore natus quasi officiis animi, ratione temporibus deserunt consectetur, mollitia repellat sequi? Illum, at, aut!\r\nLaboriosam, maxime magnam consectetur itaque corrupti libero quam, nesciunt voluptatibus eaque aliquid, sint minima ut consequatur perferendis suscipit! Veritatis at repudiandae et modi magni exercitationem laborum fugit eius blanditiis. Cum vel velit accusantium itaque voluptatibus, quisquam! Repellendus necessitatibus perspiciatis suscipit libero consectetur, nobis sapiente delectus beatae, ipsam, aspernatur vel! Repudiandae minus, fugiat. Esse ullam eligendi modi reprehenderit, cumque deserunt aperiam eum eveniet labore molestias doloremque optio alias corporis impedit rem omnis veritatis fugiat expedita consequatur numquam blanditiis beatae nulla? Consectetur corrupti, expedita ex sunt laboriosam, consequuntur porro quas repellat placeat commodi quaerat molestias accusamus saepe fugit beatae fuga magnam eum.', 20000, 0, 100, 'kg', 0, 'jeruk', 1);
+INSERT INTO `produk` (`produk_id`, `user_id`, `nama_lengkap`, `nama_kategori`, `nama_produk`, `deskripsi`, `harga`, `diskon`, `stok`, `satuan`, `jumlah_terjual`, `tags`, `is_active`) VALUES
+('20210818015816', 31, 'Annisa', 'Buah-Buahan', 'Jeruk Manis', 'Lorem ipsum dolor sit, amet consectetur adipisicing, elit. Consectetur optio labore, quo ex doloremque? Voluptates voluptate saepe harum quidem illum velit, minima ad dolor culpa et facilis libero voluptatum adipisci est error, esse exercitationem similique repellat ratione sint praesentium. Veritatis aliquam suscipit reiciendis veniam accusamus assumenda aperiam doloremque illum itaque, autem dolores qui obcaecati hic doloribus sit dolor ut, possimus ea voluptas minus ipsum ab ullam officiis. Corrupti explicabo dolor quod totam et ducimus vel obcaecati, quas asperiores magnam expedita unde eaque tempora debitis recusandae repellendus provident libero ut ea dolorem. Officiis, obcaecati! Molestias autem officiis, aspernatur, iure beatae et.\r\n  Recusandae impedit est minus necessitatibus eum sunt a iste dignissimos iusto! Libero numquam ducimus quasi ad nesciunt. Eum quidem recusandae provident nesciunt fugiat praesentium excepturi itaque vero dolor, officiis quos, voluptatum perspiciatis, voluptates, nostrum asperiores molestiae quisquam. Mollitia rem est, labore in placeat nemo, beatae officia quo quisquam, sit veritatis, fuga aliquid. Unde impedit soluta, saepe? Nemo, aliquam incidunt sint quam magni dicta veritatis similique culpa laudantium nesciunt cum odio eum ut natus quis, fugiat repellendus numquam ratione assumenda, amet et? Placeat officia, repellat velit in sapiente veritatis quasi aliquam assumenda quas quae excepturi ullam, esse molestias id hic nemo!\r\n  Optio voluptates voluptatum, a reiciendis, dolorem vel. Ipsum ab nemo voluptatum minima dignissimos consequuntur hic. Quam, dolore, harum! Maxime animi iure ipsam beatae totam aperiam pariatur explicabo, libero dolor saepe provident, magni sed ex assumenda ratione quod, odio, enim deleniti placeat optio cumque illum sapiente? Distinctio ipsa expedita perferendis aliquam hic, repellendus ratione exercitationem magni doloribus, sequi reiciendis dignissimos esse in harum ipsum maxime quibusdam facere excepturi placeat odio impedit porro! Asperiores rem vitae provident fugit sed, possimus ab officiis voluptatem numquam, unde minima facere consequuntur, tenetur quia esse reiciendis, nam sint nemo exercitationem. Quo beatae placeat voluptas officia nihil!\r\n  Et voluptatibus, qui molestiae soluta nostrum ipsam, numquam iusto sunt vero ab mollitia eaque, sint. Voluptatem maiores, quasi. Praesentium non, accusamus, rem eligendi, fuga inventore debitis sed maxime perferendis, totam modi veniam at molestias quis. Nobis tempora quo sit dolor tempore atque eligendi accusantium doloribus perferendis illum, dolorem a, quod aspernatur laboriosam? Tempora, quidem eius nulla quisquam ipsum? In accusamus deserunt ab perferendis esse iusto quasi excepturi, vero nisi ipsa nam eveniet ea nobis totam dicta praesentium et, itaque neque. Mollitia sed eum repellendus sint, natus fuga eveniet eius dolores ab explicabo quidem unde magnam vel facere! Autem, quia fugit.\r\n  Optio quod officiis error eius fuga id distinctio esse reiciendis, tempora dolor voluptates in excepturi cupiditate recusandae impedit harum, explicabo neque eaque doloremque deserunt! Fugiat soluta eius officiis nemo sapiente sed, cumque dolorum, excepturi? Minus magnam facere est exercitationem at magni, deserunt accusantium laborum facilis in veritatis vitae enim quam eaque dolores earum doloribus quia doloremque. Eligendi nesciunt sunt saepe ullam rerum, ipsum neque unde molestiae obcaecati voluptate recusandae repellendus culpa a est natus quae, perspiciatis necessitatibus repudiandae id explicabo veniam eveniet libero, consectetur reprehenderit harum! Qui officia, assumenda repellat est quidem suscipit quam doloribus ipsum voluptatum quaerat recusandae, praesentium.', 10000, 0, 188, 'kg', 0, 'buah', 1),
+('20210818040605', 31, 'Rahmat Afriyanton', 'Buah-Buahan', 'Mangga Muda', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus laudantium porro fugiat voluptate amet accusantium labore consequatur iusto, quis nisi tenetur, exercitationem vel esse voluptatum quam earum ad quisquam consectetur possimus, repellendus sit placeat. Aliquid distinctio cum, totam, quis autem earum iusto! Excepturi vitae recusandae veritatis dolore. Assumenda et saepe nisi vero unde ea, aliquam aliquid temporibus nihil harum in?\r\nObcaecati, ipsum laboriosam. Pariatur vero illo distinctio dolorem, neque qui dignissimos repellat sunt voluptates libero omnis consectetur ad perspiciatis nulla voluptatum? Animi quidem beatae alias fugit minima nostrum explicabo dicta laborum totam similique fugiat non esse recusandae, vel accusamus accusantium natus sit! Dolorem quibusdam nulla, labore suscipit nostrum nam natus voluptas tempore ad, quo expedita dolor, repudiandae mollitia animi asperiores.\r\nEnim repellendus voluptas nostrum provident molestiae adipisci eius magni recusandae a quo ad similique iure, soluta dolor ab perspiciatis ut vitae quam, maiores libero fugiat, et velit nihil quas accusantium! Doloremque rem, minus quod ipsa iste, praesentium perferendis aperiam. Corrupti quaerat, voluptates sequi ipsa sint optio ducimus? Reiciendis accusantium velit consequuntur temporibus doloribus sapiente, libero nulla, similique ea possimus odio.\r\nAtque perferendis facere eligendi labore fugiat odio, deleniti nihil modi quae maxime sunt, quisquam. Id numquam vitae dolorem iste, distinctio facere atque explicabo rerum incidunt. Dolor facilis animi molestiae sed modi beatae iure sequi voluptatibus eius fugit dignissimos ducimus voluptatem esse quae reprehenderit neque aliquam, hic amet odit maiores est veritatis obcaecati perferendis voluptates aperiam. Vel, fugiat obcaecati! Rerum, enim.', 10000, 0, 193, 'kg', 0, 'buah', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `transaksi_id` varchar(30) NOT NULL,
+  `user_id` varchar(30) NOT NULL,
+  `penerima` varchar(100) NOT NULL,
+  `toko_id` varchar(30) NOT NULL,
+  `nama_toko` varchar(100) NOT NULL,
+  `total` int(11) NOT NULL,
+  `telepon` varchar(20) NOT NULL,
+  `alamat` text NOT NULL,
+  `no_resi` varchar(30) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `last_updated` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`transaksi_id`, `user_id`, `penerima`, `toko_id`, `nama_toko`, `total`, `telepon`, `alamat`, `no_resi`, `status`, `created_date`, `last_updated`) VALUES
+('20210819070653', '27', 'Rahmat Afriyanton', '31', 'Annisa', 50000, '08122728773', 'Perumahan 123 Depok, Jawa Barat', '', 'Menunggu Pembayaran', '2021-08-19 12:06:53', '0000-00-00 00:00:00'),
+('20210819071506', '27', 'Rahmat Afriyanton', '31', 'Annisa', 30000, '08122728773', 'Perumahan 123 Depok, Jawa Barat', '', 'Menunggu Pembayaran', '2021-08-19 12:15:06', '0000-00-00 00:00:00'),
+('20210819071600', '27', 'Rahmat Afriyanton', '31', 'Annisa', 60000, '08122728773', 'Perumahan 123 Depok, Jawa Barat', '', 'Menunggu Pembayaran', '2021-08-19 12:16:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -158,8 +238,9 @@ CREATE TABLE `users` (
   `user_telepon` varchar(20) NOT NULL,
   `nama_lengkap` varchar(100) NOT NULL,
   `tanggal_lahir` date DEFAULT NULL,
-  `jenis_kelamin` enum('L','P') DEFAULT NULL,
+  `jenis_kelamin` enum('Laki-Laki','Perempuan') DEFAULT NULL,
   `level_user` enum('1','0') NOT NULL DEFAULT '0',
+  `alamat` text NOT NULL,
   `user_email_status` enum('1','0') NOT NULL DEFAULT '0',
   `user_avatar` varchar(100) NOT NULL,
   `user_status_akun` enum('1','0') NOT NULL DEFAULT '1',
@@ -172,9 +253,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `user_email`, `password`, `user_telepon`, `nama_lengkap`, `tanggal_lahir`, `jenis_kelamin`, `level_user`, `user_email_status`, `user_avatar`, `user_status_akun`, `user_tanggal_registrasi`, `user_cookie`, `last_login`) VALUES
-(27, 'rahmatafriyanton', 'rahmatafriyanton@gmail.com', '23fb875c0054673f6de4f28d964d464a', '', 'Rahmat Afriyanton', NULL, NULL, '0', '1', '', '1', '2021-07-01 11:32:13', 'd7bf7bf032847f37f1987626203e5716471d59e6', '2021-08-17 04:23:52'),
-(28, 'annkazh', 'nurulkazhimah@gmail.com', '23fb875c0054673f6de4f28d964d464a', '', 'Annisa Nurul Kazhimah', NULL, NULL, '0', '0', '', '1', '2021-07-01 11:34:56', '2bfe0b774629f95e9dc31fb8f51af4c925c02b21', '2021-07-01 11:34:59');
+INSERT INTO `users` (`user_id`, `username`, `user_email`, `password`, `user_telepon`, `nama_lengkap`, `tanggal_lahir`, `jenis_kelamin`, `level_user`, `alamat`, `user_email_status`, `user_avatar`, `user_status_akun`, `user_tanggal_registrasi`, `user_cookie`, `last_login`) VALUES
+(27, 'rahmatafriyanton', 'rahmatafriyanton@gmail.com', '23fb875c0054673f6de4f28d964d464a', '08122728773', 'Rahmat Afriyanton', '0000-00-00', 'Laki-Laki', '0', 'Perumahan 123 Depok, Jawa Barat', '1', '', '1', '2021-07-01 11:32:13', '4b7c22bf23cadd88abe1ddcedcbdf95a624f443a', '2021-08-19 06:02:54'),
+(31, 'annkazh', 'annkazh@mail.com', 'd93a5def7511da3d0f2d171d9c344e91', '', 'Annisa', NULL, NULL, '0', '', '0', '', '1', '2021-08-18 17:47:40', 'a24f6a7683d81bc22873a6d3a0173b12181de82e', '2021-08-18 12:47:40');
 
 --
 -- Indexes for dumped tables
@@ -185,6 +266,18 @@ INSERT INTO `users` (`user_id`, `username`, `user_email`, `password`, `user_tele
 --
 ALTER TABLE `artikel`
   ADD PRIMARY KEY (`artikel_id`);
+
+--
+-- Indexes for table `chart`
+--
+ALTER TABLE `chart`
+  ADD PRIMARY KEY (`chart_id`);
+
+--
+-- Indexes for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  ADD PRIMARY KEY (`detail_transaksi_id`);
 
 --
 -- Indexes for table `foto_produk`
@@ -211,6 +304,12 @@ ALTER TABLE `produk`
   ADD PRIMARY KEY (`produk_id`);
 
 --
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`transaksi_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -227,10 +326,22 @@ ALTER TABLE `artikel`
   MODIFY `artikel_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2022;
 
 --
+-- AUTO_INCREMENT for table `chart`
+--
+ALTER TABLE `chart`
+  MODIFY `chart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `detail_transaksi`
+--
+ALTER TABLE `detail_transaksi`
+  MODIFY `detail_transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `foto_produk`
 --
 ALTER TABLE `foto_produk`
-  MODIFY `foto_produk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `foto_produk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -248,7 +359,7 @@ ALTER TABLE `otp_email`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

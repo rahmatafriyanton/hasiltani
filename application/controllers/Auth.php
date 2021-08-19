@@ -42,7 +42,7 @@ class Auth extends CI_Controller {
 	public function keluar() {
 		$this->session->sess_destroy();
 		delete_cookie(md5('gemastik'));
-		redirect('auth');
+		redirect('Home');
 	}
 
 }

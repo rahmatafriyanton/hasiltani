@@ -87,42 +87,34 @@
 
           <div class="header-misc">
 
-            <?php if ($this->session->userdata('username') != ''): ?>
+            <?php if ($this->session->userdata('username') != ''): $chart = isi_chart(3);?>
             <div id="top-cart" class="header-misc-icon d-none d-sm-block">
-              <a href="#" class="me-1" id="top-cart-trigger"><i class="icon-line-bag"></i><span class="top-cart-number">5</span></a>
+              <a href="#" class="me-1" id="top-cart-trigger">
+                <i class="icon-line-bag"></i>
+                <span class="top-cart-number"><?= count(isi_chart()) ?></span>
+              </a>
               <div class="top-cart-content">
                 <div class="top-cart-title">
                   <h4>Keranjang Belanja</h4>
                 </div>
-                <!-- <div class="top-cart-items">
-                      <div class="top-cart-item">
-                        <div class="top-cart-item-image">
-                          <a href="#"><img src="<?= base_url('assets/') ?>images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
-                        </div>
-                        <div class="top-cart-item-desc">
-                          <div class="top-cart-item-desc-title">
-                            <a href="#">Blue Round-Neck Tshirt with a Button</a>
-                            <span class="top-cart-item-price d-block">$19.99</span>
-                          </div>
-                          <div class="top-cart-item-quantity">x 2</div>
-                        </div>
+                <div class="top-cart-items">
+                  <?php foreach ($chart as $row): ?>
+                    <div class="top-cart-item">
+                      <div class="top-cart-item-image">
+                        <a href="#"><img src="<?= base_url('assets/img/produk/').$row['foto_produk'] ?>" alt="<?= $row['nama_produk'] ?>" /></a>
                       </div>
-                      <div class="top-cart-item">
-                        <div class="top-cart-item-image">
-                          <a href="#"><img src="<?= base_url('assets/') ?>images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+                      <div class="top-cart-item-desc">
+                        <div class="top-cart-item-desc-title">
+                          <a href="#"><?= $row['nama_produk'] ?></a>
+                          <span class="top-cart-item-price d-block"><?= idr_format($row['total']) ?></span>
                         </div>
-                        <div class="top-cart-item-desc">
-                          <div class="top-cart-item-desc-title">
-                            <a href="#">Light Blue Denim Dress</a>
-                            <span class="top-cart-item-price d-block">$24.99</span>
-                          </div>
-                          <div class="top-cart-item-quantity">x 3</div>
-                        </div>
+                        <div class="top-cart-item-quantity">x <?= $row['jumlah'] ?></div>
                       </div>
-                    </div> -->
+                    </div>
+                  <?php endforeach ?>
+                </div>
                 <div class="top-cart-action">
-                  <span class="top-checkout-price">$114.95</span>
-                  <a href="#" class="button button-3d button-small m-0">View Cart</a>
+                  <a href="<?= base_url('Chart') ?>" class="button button-3d button-small m-0">Lihat Semua</a>
                 </div>
               </div>
             </div>
@@ -146,11 +138,13 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu1" style="">
                   <a class="dropdown-item text-sm text-muted"><?= $this->session->userdata('nama_lengkap') ?></a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-start" href="<?= base_url('Profil').$this->session->userdata('user_id') ?>">
+                  <a class="dropdown-item text-start" href="<?= base_url('Profil/') ?>">
                     <i class="icon-user21 me-2"></i>Profil
                   </a>
                   <a class="dropdown-item text-start" href="<?= base_url('Seller') ?>"><i class="icon-store me-2"></i>Toko Saya</a>
                   <a class="dropdown-item text-start" href="<?= base_url('Creator') ?>"><i class="icon-news me-2"></i>Artikel Saya</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-start" href="<?= base_url('Transaksi') ?>"><i class="icon-bill me-2"></i>Transaksi Saya</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item text-start" href="<?= base_url('Auth/keluar') ?>">Keluar <i class="icon-signout"></i></a>
                 </ul>
@@ -239,7 +233,7 @@
         </form>
       </div>
       <div class="card-footer py-4 center">
-        <p class="mb-0">Belum punya akun? <a href="#"><u>Daftar</u></a></p>
+        <p class="mb-0">Belum punya akun? <a href="<?= base_url('Register') ?>"><u>Daftar</u></a></p>
       </div>
     </div>
   </div>

@@ -48,14 +48,13 @@
 
                 </div>
 
-                <div class="col-md-6 product-desc">
-
+                <div class="col-md-6 product-desc mt-4">
+                  <h3 class="mb-0 "><?= $produk['produk']['nama_produk'] ?></h3>
                   <div class="d-flex align-items-center justify-content-between">
-
                     <?php if ($produk['produk']['diskon'] >= 1): ?>
-                      <div class="product-price"><del>Rp <?= $produk['produk']['harga'] ?></del> <ins class="fw-semibold">Rp <?= $produk['produk']['harga'] * ($produk['produk']['diskon'] / 100) ?></ins></div>
+                      <div class="product-price"><del><?= idr_format($produk['produk']['harga']) ?></del> <ins class="fw-semibold"><?= idr_format($produk['produk']['harga'] * ($produk['produk']['diskon'] / 100)) ?></ins></div>
                     <?php else: ?>
-                      <div class="product-price"><ins class="fw-semibold">Rp <?= $produk['produk']['harga'] ?></ins></div>
+                      <div class="product-price"><ins class="fw-semibold"><?= idr_format($produk['produk']['harga']) ?></ins></div>
                     <?php endif ?>
 
                     <div class="product-rating">
@@ -70,18 +69,50 @@
 
                   <div class="line"></div>
 
-                  <!-- Product Single - Quantity & Cart Button
-                                    ============================================= -->
-                  <form class="cart mb-0 d-flex justify-content-between align-items-center" method="post" enctype='multipart/form-data'>
-                    <div class="quantity clearfix">
-                      <input type="button" value="-" class="minus">
-                      <input type="number" step="1" min="1" name="quantity" value="1" title="Qty" class="qty" />
-                      <input type="button" value="+" class="plus">
-                    </div>
-                    <button type="submit" class="add-to-cart button m-0">Masukkan Keranjang</button>
-                  </form><!-- Product Single - Quantity & Cart Button End -->
+                  <!-- Product Single - Quantity & Cart Button-->
+                  <?php 
+                    if ($produk['produk']['user_id'] != $this->session->userdata('user_id')): 
+                      if ($produk['produk']['diskon'] >= 1) {
+                        $harga = $produk['produk']['harga'] * ($produk['produk']['diskon'] / 100);
+                      } else {
+                        $harga = $produk['produk']['harga'];
+                      }
+                    ?>
+                    <form id="form-chart" class="cart mb-0 d-flex justify-content-between align-items-center" method="post" enctype='multipart/form-data'>
+                      <div class="quantity clearfix">
+                        <input type="hidden" name="produk_id" value="<?= $produk['produk']['produk_id'] ?>">
+                        <input type="hidden" name="nama_produk" value="<?= $produk['produk']['nama_produk'] ?>">
+                        <input type="hidden" name="toko_id" value="<?= $produk['produk']['user_id'] ?>">
+                        <input type="hidden" name="nama_toko" value="<?= $produk['produk']['nama_lengkap'] ?>">
+                        <input type="button" value="-" class="minus">
+                        <input type="number" step="1" min="1" max="<?= $produk['produk']['stok'] ?>" name="jumlah" value="1" title="Qty" class="qty" />
+                        <input type="hidden" name="total" id="total" value="<?= $harga ?>">
+                        <input type="button" value="+" class="plus">
+                      </div>
+                      <button class="add-to-cart button m-0">Masukkan Keranjang</button>
+                    </form><!-- Product Single - Quantity & Cart Button End -->
+                  <?php endif ?>
 
                   <div class="line"></div>
+
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th width="20%">Kategori</th>
+                        <td>: <?= $produk['produk']['nama_kategori'] ?></td>
+                      </tr>
+                      <tr>
+                        <th width="20%">Stok</th>
+                        <td>: <?= $produk['produk']['stok'].$produk['produk']['satuan'] ?></td>
+                      </tr> 
+                      <tr>
+                        <th width="20%">Terjual</th>
+                        <td>: <?= rand(1, 1000).$produk['produk']['satuan'] ?></td>
+                      </tr> 
+                    </thead>    
+                  </table>
+
+
                   <p><?= $produk['produk']['deskripsi'] ?></p>
 
                   <div class="card product-meta">
@@ -463,59 +494,6 @@
 
         </div>
 
-        <!-- <div class="sidebar col-lg-3">
-          <div class="sidebar-widgets-wrap">
-
-            <div class="widget clearfix">
-
-              <h4>Produk Populer</h4>
-              <div class="posts-sm row col-mb-30" id="popular-shop-list-sidebar">
-
-                <div class="entry col-12">
-                  <div class="grid-inner row g-0">
-                    <div class="col-auto">
-                      <div class="entry-image">
-                        <a href="#"><img src="<?= base_url('assets/img/produk/jeruk/jeruk-1.jpg') ?>" alt="Image"></a>
-                      </div>
-                    </div>
-                    <div class="col ps-3">
-                      <div class="entry-title">
-                        <h4><a href="#">Jeruk Manis</a></h4>
-                      </div>
-                      <div class="entry-meta no-separator">
-                        <ul>
-                          <li class="color">Rp.25.000</li>
-                          <li><i class="icon-star3"></i><i class="icon-star3"></i><i class="icon-star3"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="entry col-12">
-                  <div class="grid-inner row g-0">
-                    <div class="col-auto">
-                      <div class="entry-image">
-                        <a href="#"><img src="<?= base_url('assets/img/produk/apel/apel-1.jpg') ?>" alt="Image"></a>
-                      </div>
-                    </div>
-                    <div class="col ps-3">
-                      <div class="entry-title">
-                        <h4><a href="#">Apel Hijau</a></h4>
-                      </div>
-                      <div class="entry-meta no-separator">
-                        <ul>
-                          <li class="color">Rp.10.000</li>
-                          <li><i class="icon-star3"></i><i class="icon-star3"></i><i class="icon-star-half-full"></i><i class="icon-star-empty"></i><i class="icon-star-empty"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
 
     </div>
@@ -523,3 +501,38 @@
 </section><!-- #content end -->
 
 <?php $this->load->view('layout/footer'); ?>
+<script>
+  $(document).ready(function() {
+    $('#form-chart').submit(function(e) {
+      e.preventDefault();
+      var me = $(this);
+      $.ajax({
+        url: "<?= base_url('Chart/add_to_chart') ?>",
+        type: 'post',
+        data: me.serialize(),
+        dataType: 'json',
+        success: function(response) {
+          if (response.success == true) {
+            Swal.fire({
+              title: 'Berhasil',
+              text: 'Produk ditambahkan ke keranjang',
+              icon: 'success',
+              type: 'success',
+              confirmButtonColor: '#1abc9c'
+            }).then(function() {
+              location.reload()
+            })
+          } 
+        },
+        done: (function() {
+          Pace.done()
+        })
+      })
+    })
+
+    $("input[name=jumlah]").change(function() {
+      harga = "<?= $harga ?>"
+      $("input[name=total]").val($(this).val() * harga)
+    })
+  });
+</script>

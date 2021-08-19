@@ -3,63 +3,76 @@
 <section id="page-title" class="page-title-pattern">
 
   <div class="container clearfix">
-    <h1>Artikel Saya</h1>
-    <span>Kamu bisa membagikan apapun di sini.</span>
+    <h1>Edit Profil</h1>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Artikel</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Artikel Saya</li>
+      <li class="breadcrumb-item"><a href="#">Profil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Edit</li>
     </ol>
   </div>
 
 </section>
 
 <section id="content">
-  <div class="content-wrap" style="padding-top: 50px !important;">
+  <div class="content-wrap pt-4">
     <div class="container clearfix">
       <div class="row ">
-
         <div class="col-md-12">
-          <h4 class="pb-4 font-weight-bolder">Buat Artikel Terbaikmu Sekarang</h4>
-          <form id="form-add">
+          <form id="form-edit">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="">Judul</label>
-                  <input type="text" class="form-control" name="judul" id="judul" placeholder="Masukkan Judul">
+                  <label for="">Nama Lengkap</label>
+                  <input type="text" class="form-control" name="nama_lengkap" value="<?= $user['nama_lengkap'] ?>" id="nama_lengkap" placeholder="Masukkan nama lengkap">
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="">Kategori</label>
-                  <select class="form-control" name="nama_kategori" id="nama_kategori">
-                    <option value="">Pilih Kategori</option>
-                    <?php 
-                    foreach ($kategori as $row) {
-                      echo "<option value='{$row['nama_kategori']}'>{$row['nama_kategori']}</option>";
-                    }
-                    ?>
+                  <label for="">Username</label>
+                  <input type="text" class="form-control" value="<?= $user['username'] ?>" disabled readonly>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Email</label>
+                  <input type="text" class="form-control" value="<?= $user['user_email'] ?>" disabled readonly>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Telepon</label>
+                <input type="text" class="form-control" id="user_telepon" name="user_telepon" value="<?= $user['user_telepon'] ?>">
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Tanggal Lahir</label>
+                  <input type="text" name="tanggal_lahir" id="tanggal_lahir" class="form-control" value="<?= $user['tanggal_lahir'] ?>">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="">Jenis Kelamin</label>
+                  <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
                   </select>
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="">Tags</label>
-                  <input type="text" class="form-control" name="tags" id="tags" placeholder="tags">
-                </div>
+              <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password">
+                <small class="text-muted">*)Kosongkan jika tidak diganti</small>
               </div>
 
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="">Deskrpsi</label>
-                  <textarea class="form-control summernote" name="deskripsi" id="deskripsi" rows="10"></textarea>
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <input type="file" name="userfile" id="userfile" class="form-control">
-              </div>
+              <div class="form-group">
+                <label for="">Alamat</label>
+                <textarea class="form-control" name="alamat" id="alamat" rows="5"><?= $user['alamat'] ?></textarea>
+              </div>    
             </div>
 
             <div class="d-flex justify-content-end mt-5">
@@ -68,22 +81,6 @@
             </div>
           </form>
         </div>
-        <!-- <div class="col-md-3">
-
-          <div class="list-group">
-            <a href="<?= base_url('seller/produk') ?>" class="list-group-item list-group-item-action d-flex justify-content-between active">
-              <div>Produk</div><i class="icon-line-archive"></i>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-              <div>Penjualan</div><i class="icon-newspaper3"></i>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-              <div>Pesanan</div><i class="icon-line-truck"></i>
-            </a>
-          </div>
-
-
-        </div> -->
       </div>
 
     </div>
@@ -92,33 +89,23 @@
 
 <script>
   $(document).ready(function() {
-    $('#form-add').submit(function(e) {
+    $('#jenis_kelamin').val("<?= $user['jenis_kelamin'] ?>")
+    $('#form-edit').submit(function(e) {
       e.preventDefault();
-      // data = $(this).serialize();
-      data = new FormData($(this)[0]);
-      $('.kirim').prop('disabled', true);
-
       $.ajax({
-        url: `<?= base_url('Creator/add_process') ?>`,
-        method: 'POST',
-        data: data,
-        enctype: 'multipart/form-data',
-        processData: false,
-        contentType: false,
-        cache: false,
+        url: `<?= base_url('profil/edit_process') ?>`,
+        type: 'post',
+        data: $(this).serialize(),
         dataType: 'json',
         success: function(response) {
-          if (response.status == 200) {
+          if (response.success == true) {
             $('.invalid-feedback').remove()
-            alert(response.message)
+            alert('Data berhasil diupdate')
             window.location.href = response.redirect
           } else {
             $('.kirim').prop('disabled', false);
             $.each(response.message, function(key, value) {
               element = $('#' + key);
-              // if (key == 'foto_produk') {
-              //   element = $('.input-group');
-              // }
               element.parent().find('.invalid-feedback').remove();
               element.removeClass('is-invalid')
               .removeClass('is-valid')
@@ -134,7 +121,7 @@
       });
     });
 
-  // Inisiasi Summernote
+      // Inisiasi Summernote
   $('.summernote').summernote({
     height: 350,
     minHeight: null,

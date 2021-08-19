@@ -3,7 +3,7 @@
 <section id="page-title" class="page-title-pattern">
 
   <div class="container clearfix">
-    <h1>Toko Saya</h1>
+    <h1>Toko</h1>
     <span>Kamu bisa mengatur produk di sini.</span>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Toko</a></li>
@@ -14,17 +14,27 @@
 </section>
 
 <section id="content">
-  <div class="content-wrap">
+  <div class="content-wrap pt-5">
     <div class="container clearfix">
 
 
       <div class="row ">
+        <div class="col-md-3">
 
-        <div class="col-md-9">
-         <div class="d-flex justify-content-between mb-3">
-          <div>
-            <h3>Produk Saya</h3>
+          <div class="list-group">
+            <a href="<?= base_url('seller/produk') ?>" class="list-group-item list-group-item-action d-flex justify-content-between active">
+              <div>Produk</div><i class="icon-line-archive"></i>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
+              <div>Penjualan</div><i class="icon-newspaper3"></i>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
+              <div>Pesanan</div><i class="icon-line-truck"></i>
+            </a>
           </div>
+        </div>
+        <div class="col-md-9">
+         <div class="d-flex justify-content-end mb-3">
           <div>
             <a href="<?= base_url('Seller/add_produk') ?>" style="margin:2px" class="btn btn-sm btn-tambah">Tambah</a>
           </div>
@@ -45,22 +55,7 @@
             <tbody></tbody>
           </table>
         </div>
-        <div class="col-md-3">
-
-          <div class="list-group">
-            <a href="<?= base_url('seller/produk') ?>" class="list-group-item list-group-item-action d-flex justify-content-between active">
-              <div>Produk</div><i class="icon-line-archive"></i>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-              <div>Penjualan</div><i class="icon-newspaper3"></i>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-              <div>Pesanan</div><i class="icon-line-truck"></i>
-            </a>
-          </div>
-
-
-        </div>
+        
       </div>
 
     </div>
@@ -140,8 +135,8 @@ $(document).ready(function() {
           id: $(this).data('id')
         },
         success: function(response) {
-          alert('Produk Berhasil Dihapus');
           if (response.status == '200') {
+            alert('Produk Berhasil Dihapus')
             location.reload();
           } else {
             return false;
