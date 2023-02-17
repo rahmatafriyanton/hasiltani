@@ -17,23 +17,26 @@
   <div class="content-wrap pt-5">
     <div class="container clearfix">
 
-
-      <div class="row ">
+      <div class="row">
         <div class="col-md-3">
 
           <div class="list-group">
-            <a href="<?= base_url('seller/produk') ?>" class="list-group-item list-group-item-action d-flex justify-content-between active">
+            <a href="<?= base_url('Seller') ?>" class="list-group-item list-group-item-action d-flex justify-content-between active">
               <div>Produk</div><i class="icon-line-archive"></i>
             </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-              <div>Penjualan</div><i class="icon-newspaper3"></i>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
+            <a href="<?= base_url('Pesanan') ?>" class="list-group-item list-group-item-action d-flex justify-content-between">
               <div>Pesanan</div><i class="icon-line-truck"></i>
             </a>
           </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-3">
+          <h5 class="mb-0">Saldo Penjual: <?= idr_format(get_saldo_penjual()) ?></h5>
+          <a href=""><i class="icon-line-download font-weight-bold"></i></a>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-md-12">
          <div class="d-flex justify-content-end mb-3">
           <div>
             <a href="<?= base_url('Seller/add_produk') ?>" style="margin:2px" class="btn btn-sm btn-tambah">Tambah</a>
@@ -55,7 +58,6 @@
             <tbody></tbody>
           </table>
         </div>
-        
       </div>
 
     </div>

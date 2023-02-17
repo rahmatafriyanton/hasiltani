@@ -82,9 +82,13 @@
   <!-- Bootstrap File Upload -->
   <script src="<?= base_url('assets/js/components/bs-filestyle.js') ?>"></script>
 
+
   <!-- Footer Scripts-->
   <script src="<?= base_url('assets/js/functions.js')?>"></script>
-
-
+  <script>
+    $(document).ready(function() {
+      $('.datatable').DataTable()
+    });
+  </script>
 </body>
 </html>

@@ -70,7 +70,6 @@
 
 
 <?php $this->load->view('layout/footer'); ?>
-
 <script>
   $(document).ready(function() {
     $('#register').submit(function(e) {
@@ -88,7 +87,6 @@
             $('.form-control').removeClass('is-invalid')
               .removeClass('is-valid')
               .addClass('is-valid')
-
             Swal.fire({
               title: 'Berhasil',
               text: 'Berhasil masuk!',

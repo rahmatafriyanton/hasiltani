@@ -87,6 +87,11 @@
               <td>: <?= $this->session->userdata('alamat'); ?></td>
             </tr>
           </table>
+
+          <form id="payment-form" method="post" action="<?= base_url('Checkout/simpan') ?>">
+            <input type="hidden" name="result_type" id="result-type" value=""></div>
+            <input type="hidden" name="result_data" id="result-data" value=""></div>
+          </form>
           <a href="#" class="button button-3d float-end buat_pesanan">Buat Pesanan</a>
         </div>
       </div>
@@ -94,39 +99,81 @@
   </div>
 </section>
 
+<script type="text/javascript"src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-un-F27A5sAYpvnGk"></script>
 <script>
   $(document).ready(function() {
     $('.buat_pesanan').click(function(e) {
       e.preventDefault()
+      // $.ajax({
+      //   url: "<?= base_url('Checkout/buat_pesanan') ?>",
+      //   type: 'post',
+      //   dataType: 'json',
+      //   success: function(response) {
+      //     if (response.success == true) {
+      //       Swal.fire({
+      //         title: 'Berhasil',
+      //         text: 'Pesanan berhasil dibuat!',
+      //         icon: 'success',
+      //         type: 'success',
+      //         confirmButtonColor: '#1abc9c'
+      //       }).then(function() {
+      //         window.location = response.redirect;
+      //       })
+      //     } else {
+      //        Swal.fire({
+      //         title: 'Error',
+      //         text: 'Terjadi Kesalahan! Hubungi Admin',
+      //         icon: 'error',
+      //         type: 'error',
+      //         confirmButtonColor: '#1abc9c'
+      //       })
+      //     }
+      //   },
+      //   done: (function() {
+      //     Pace.done()
+      //   })
+      // })
+
       $.ajax({
-        url: "<?= base_url('Checkout/buat_pesanan') ?>",
-        type: 'post',
-        dataType: 'json',
-        success: function(response) {
-          if (response.success == true) {
-            Swal.fire({
-              title: 'Berhasil',
-              text: 'Pesanan berhasil dibuat!',
-              icon: 'success',
-              type: 'success',
-              confirmButtonColor: '#1abc9c'
-            }).then(function() {
-              window.location = response.redirect;
-            })
-          } else {
-             Swal.fire({
-              title: 'Error',
-              text: 'Terjadi Kesalahan! Hubungi Admin',
-              icon: 'error',
-              type: 'error',
-              confirmButtonColor: '#1abc9c'
-            })
+      url: "<?= base_url('Checkout/buat_pesanan') ?>",
+      cache: false,
+
+      success: function(data) {
+        //location = data;
+
+        console.log('token = '+data);
+        
+        var resultType = document.getElementById('result-type');
+        var resultData = document.getElementById('result-data');
+
+        function changeResult(type,data){
+          $("#result-type").val(type);
+          $("#result-data").val(JSON.stringify(data));
+          //resultType.innerHTML = type;
+          //resultData.innerHTML = JSON.stringify(data);
+        }
+
+        snap.pay(data, {
+          
+          onSuccess: function(result){
+            changeResult('success', result);
+            console.log(result.status_message);
+            console.log(result);
+            $("#payment-form").submit();
+          },
+          onPending: function(result){
+            changeResult('pending', result);
+            console.log(result.status_message);
+            $("#payment-form").submit();
+          },
+          onError: function(result){
+            changeResult('error', result);
+            console.log(result.status_message);
+            $("#payment-form").submit();
           }
-        },
-        done: (function() {
-          Pace.done()
-        })
-      })
+        });
+      }
+    });
     })
   });
 </script>

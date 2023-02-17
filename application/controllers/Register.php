@@ -30,10 +30,43 @@ class Register extends CI_Controller {
 			$params['password'] = md5(sha1($params['password']));
 			$this->register->process_register($params);
 			daftarkan_session($params['username']);
+			$this->akun_chat();
 			$data['redirect'] = base_url();
 			$data['success'] = true;
 		}
 		echo json_encode($data);
+	}
+
+	private function akun_chat() {
+		$curl = curl_init();
+
+		curl_setopt_array($curl, [
+			CURLOPT_URL => "https://api-us.cometchat.io/v2.0/users",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => "{\"uid\":\"{$this->session->userdata('username')}\",\"name\":\"{$this->session->userdata('nama_lengkap')}\"}",
+			CURLOPT_HTTPHEADER => [
+				"Accept: application/json",
+				"Content-Type: application/json",
+				"apiKey: 43f5f272368deee7d3d308b53f78d72bde0d57a9",
+				"appId: 1923460f9a6469cc"
+			],
+		]);
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			return true;
+		}
 	}
 
 	public function cek_email($email) {

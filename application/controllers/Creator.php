@@ -40,7 +40,7 @@ class Creator extends CI_Controller {
 			if ($upload_thumb['success']) {
 				$params = $this->input->post();
 				$params['thumbnail_artikel'] = $upload_thumb['thumbnail_artikel'];
-				$params['artikel_id'] = date('YMdhis');
+				$params['artikel_id'] = date('Ymdhis');
 				if ($this->artikel->add_artikel($params)) {
 					$data['status'] = 200;
 					$data['redirect'] = base_url('Creator');

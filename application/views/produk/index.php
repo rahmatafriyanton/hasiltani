@@ -225,8 +225,7 @@
 
         </div><!-- .postcontent end -->
 
-        <!-- Sidebar
-            ============================================= -->
+        <!-- Sidebar -->
         <div class="sidebar col-lg-2">
           <div class="sidebar-widgets-wrap">
 

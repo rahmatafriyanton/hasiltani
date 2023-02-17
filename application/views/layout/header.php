@@ -145,6 +145,7 @@
                   <a class="dropdown-item text-start" href="<?= base_url('Creator') ?>"><i class="icon-news me-2"></i>Artikel Saya</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item text-start" href="<?= base_url('Transaksi') ?>"><i class="icon-bill me-2"></i>Transaksi Saya</a>
+                  <a class="dropdown-item text-start" href="<?= base_url('Transaksi/tagihan') ?>"><i class="icon-bill me-2"></i>Tagihan Saya</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item text-start" href="<?= base_url('Auth/keluar') ?>">Keluar <i class="icon-signout"></i></a>
                 </ul>
@@ -184,7 +185,7 @@
               </li>
 
               <li class="menu-item diskusi">
-                <a class="menu-link" href="">
+                <a class="menu-link" href="<?= base_url('Diskusi') ?>">
                   <div>Diskusi</div>
                 </a>
               </li>

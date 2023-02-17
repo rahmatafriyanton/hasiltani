@@ -17,6 +17,12 @@ class M_user extends CI_Model {
 		return $this->db->update('users', $params);
 	}
 
+	public function get_saldo_penjual() {
+		$this->db->select('saldo_seller');
+		$this->db->where('user_id', $this->session->userdata('user_id'));
+		return $this->db->get('users')->row_array()['saldo_seller'];
+	}
+
 }
 
 /* End of file M_user.php */
